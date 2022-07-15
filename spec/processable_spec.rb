@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Lined do
+RSpec.describe Processable do
   let(:github_to_database_class) do
-    Class.new(Lined) do
+    Class.new(Processable) do
       step :get_repos do |result_from_previous_step, current_step, all_steps|
         1
       end

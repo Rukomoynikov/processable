@@ -4,7 +4,7 @@
 
 require 'byebug'
 
-class Lined
+class Processable
   @@registered_steps = []
   class Error < StandardError; end
 

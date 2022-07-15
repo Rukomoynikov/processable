@@ -1,4 +1,4 @@
-class LocationsUploader < Lined::Commander
+class LocationsUploader < Processable::Commander
   configure do |config|
     config.verbose = true
   end
@@ -14,7 +14,7 @@ class LocationsUploader < Lined::Commander
   end
 end
 
-class LocationsUploaderStep < Lined::Step
+class LocationsUploaderStep < Processable::Step
 
 end
 
