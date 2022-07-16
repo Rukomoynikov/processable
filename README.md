@@ -1,8 +1,23 @@
-# process_it
+# Processable
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/processable`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Ruby gem to help you organize any process into series of steps. 
+
+```ruby
+class PrintGithubRepos < Processable
+  step :get_repos do
+    github_client.where('rails', per_page: 100)
+  end
+
+  step :get_only_essential_fields do |repos_json|
+    repos_json.except(:title, :description)
+  end
+  
+  step :print_to_console do |repos_json|
+    print repos_json
+  end
+end
+```
 
 ## Installation
 
@@ -22,7 +37,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+**Define new class with required behavior**
+
+```ruby
+class SiteScrapper < Processable
+end
+```
+
+**Add steps to the process**
+
+Each step accepts three optional paramaters: [result from_previous step, current_step, all_steps]
+
+```ruby
+require 'net/http'
+
+class SiteScrapper < Processable
+  step :get_web_pages do
+    Net::HTTP.get('example.com', '/index.html')    
+  end
+  
+  step :save_to_database do |web_page|
+    DB.save(web_page)
+  end
+end
+```
 
 ## Development
 
