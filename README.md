@@ -17,6 +17,8 @@ class PrintGithubRepos < Processable
     print repos_json
   end
 end
+
+PrintGithubRepos.new.process
 ```
 
 ## Installation
