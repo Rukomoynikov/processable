@@ -46,7 +46,7 @@ end
 
 **Add steps to the process**
 
-Each step accepts three optional paramaters: [result from_previous step, current_step, all_steps]
+Each step accepts three optional paramaters: [result from_previous step, current_step, all_steps]. Each step has some result as we usually do it you can either call return explicitly or last line will be accepted as result of the step. 
 
 ```ruby
 require 'net/http'
@@ -60,6 +60,14 @@ class SiteScrapper < Processable
     DB.save(web_page)
   end
 end
+```
+
+**Add steps to the process**
+
+To start the process simply call... 
+
+```ruby
+SiteScrapper.new.process
 ```
 
 ## Development
