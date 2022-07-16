@@ -19,9 +19,10 @@ end
 class LocationsUploaderStep < Processable::Step
 end
 
-# Order of steps as it's been configured
+# Order of steps as it's been defined
 # In the result you will get either result of the last step
 # Print every step (option to disable)
 # How to validate?
 # Stop if something went wrong
-# Steps cannot use the same name
+# Steps cannot use the same name (validate it)
+# Using a class instead of block and move all logic there (maybe process of processes)
