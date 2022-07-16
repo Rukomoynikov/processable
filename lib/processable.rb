@@ -47,6 +47,6 @@ class Processable
   end
 
   private
-  
+
   attr_accessor :registered_steps
 end
