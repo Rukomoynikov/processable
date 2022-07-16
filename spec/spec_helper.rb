@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "processable"
-require 'byebug'
+require "byebug"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

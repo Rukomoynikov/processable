@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class LocationsUploader < Processable::Commander
   configure do |config|
     config.verbose = true
   end
 
   step :load_csv do
-    result = '1'
+    result = "1"
   end
 
   step :transform_data, LocationsUploaderStep
@@ -15,7 +17,6 @@ class LocationsUploader < Processable::Commander
 end
 
 class LocationsUploaderStep < Processable::Step
-
 end
 
 # Order of steps as it's been configured

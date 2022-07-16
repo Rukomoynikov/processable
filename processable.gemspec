@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-
 Gem::Specification.new do |spec|
   spec.name          = "processable"
-  spec.version       = '0.0.1'
+  spec.version       = "0.0.1"
   spec.authors       = ["Max Rukomoynikov"]
   spec.email         = ["rukomoynikov@gmail.com"]
 
@@ -11,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Write a longer description or delete this line."
   spec.homepage      = "http://habr.com"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "http://habr.com"
