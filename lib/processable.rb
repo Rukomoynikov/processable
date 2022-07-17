@@ -46,8 +46,7 @@ class Processable
     @@registered_steps.last[:result]
   end
 
-  def initialize(*arguments)
-  end
+  def initialize(*arguments); end
 
   private
 
