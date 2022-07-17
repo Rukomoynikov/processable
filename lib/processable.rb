@@ -46,6 +46,9 @@ class Processable
     @@registered_steps.last[:result]
   end
 
+  def initialize(*arguments)
+  end
+
   private
 
   attr_accessor :registered_steps

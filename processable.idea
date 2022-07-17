@@ -20,6 +20,8 @@ class LocationsUploaderStep < Processable::Step
 end
 
 # Order of steps as it's been defined
+# Run process until
+# Pass arguments to each step manually for test purpose
 # In the result you will get either result of the last step
 # Print every step (option to disable)
 # How to validate?
