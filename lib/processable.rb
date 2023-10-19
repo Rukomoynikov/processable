@@ -51,6 +51,12 @@ class Processable
     @@registered_steps.last[:result]
   end
 
+  def step(step_name:, options:)
+    step = @@registered_steps.find { |step| step[:name] == step_name }
+
+    instance_exec(options, step, @@registered_steps, &step[:block])
+  end
+
   def initialize(*arguments); end
 
   private

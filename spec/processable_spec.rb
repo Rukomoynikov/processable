@@ -22,13 +22,14 @@ RSpec.describe Processable do
   describe "developers can execute only one step" do
     let(:github_to_database_class) do
       Class.new(Processable) do
-        step :get_repos do
+        step :step2 do |result_from_previous_step|
+          result_from_previous_step + 2
         end
       end
     end
 
-    it 'supports "step" class method' do
-      expect { github_to_database_class.new }.not_to raise_error
+    it "calls only until second step" do
+      expect(github_to_database_class.new.step(step_name: :step2, options: 3)).to eq(5)
     end
   end
 
