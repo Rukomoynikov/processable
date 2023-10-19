@@ -31,7 +31,12 @@ class Processable
   end
 
   # Run steps in order as they were defined
-  def process
+  def process(run_until: nil)
+    if run_until
+      run_until_index = @@registered_steps.find_index { |step| step[:name] == run_until }
+      @@registered_steps = @@registered_steps[0..run_until_index]
+    end
+
     @@registered_steps.each_with_index do |step, index|
       previous_step = index.zero? ? {} : @@registered_steps[index - 1]
 
