@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "processable"
-  spec.version       = "0.0.2"
+  spec.version       = "1.0.0"
   spec.authors       = ["Max Rukomoynikov"]
   spec.email         = ["rukomoynikov@gmail.com"]
 
