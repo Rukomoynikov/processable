@@ -23,7 +23,6 @@ RSpec.describe Processable do
     end
   end
 
-
   describe "using previous results in further steps" do
     let(:github_to_database_class) do
       Class.new(Processable) do
