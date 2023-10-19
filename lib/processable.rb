@@ -32,27 +32,31 @@ class Processable
 
   # Run steps in order as they were defined
   def process(run_until: nil)
-    if run_until
+    steps_to_run = if run_until
       run_until_index = @@registered_steps.find_index { |step_hash| step_hash[:name] == run_until }
-      @@registered_steps = @@registered_steps[0..run_until_index]
+      @@registered_steps[0..run_until_index]
+    else
+      @@registered_steps
     end
 
-    @@registered_steps.each_with_index do |step, index|
-      previous_step = index.zero? ? {} : @@registered_steps[index - 1]
+    steps_to_run.each_with_index do |step, index|
+      previous_step = index.zero? ? {} : steps_to_run[index - 1]
 
       result = instance_exec(previous_step[:result],
                              step,
-                             @@registered_steps,
+                             steps_to_run,
                              &step[:block])
 
       step[:result] = result
     end
 
-    @@registered_steps.last[:result]
+    steps_to_run.last[:result]
   end
 
-  def step(step_name:, options:)
+  def exec_step(step_name:, options:)
     step = @@registered_steps.find { |step| step[:name] == step_name }
+
+    raise Error.new("Step '#{step_name}' not found") unless step
 
     instance_exec(options, step, @@registered_steps, &step[:block])
   end

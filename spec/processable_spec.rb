@@ -2,36 +2,27 @@
 
 RSpec.describe Processable do
   describe "developers can control which steps to call" do
-    let(:github_to_database_class) do
+    let(:class_1) do
       Class.new(Processable) do
         step :step1 do
           1
         end
 
-        step :step2 do
-          2
+        step :step2 do |previous_step_result|
+          previous_step_result + 2
         end
       end
     end
 
     it "calls only until second step" do
-      expect(github_to_database_class.new.process(run_until: :step1)).to eq(1)
-    end
-  end
-
-  describe "developers can execute only one step" do
-    let(:github_to_database_class) do
-      Class.new(Processable) do
-        step :step2 do |result_from_previous_step|
-          result_from_previous_step + 2
-        end
-      end
+      expect(class_1.new.process(run_until: :step1)).to eq(1)
     end
 
     it "calls only until second step" do
-      expect(github_to_database_class.new.step(step_name: :step2, options: 3)).to eq(5)
+      expect(class_1.new.exec_step(step_name: :step2, options: 3)).to eq(5)
     end
   end
+
 
   describe "using previous results in further steps" do
     let(:github_to_database_class) do
