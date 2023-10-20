@@ -23,7 +23,9 @@ RSpec.describe Processable do
     end
 
     it "raises an error when an invalid step name is provided" do
-      expect { class_1.new.exec_step(step_name: :invalid_step, options: 3) }.to raise_error(Processable::StepNotFoundError)
+      expect do
+        class_1.new.exec_step(step_name: :invalid_step, options: 3)
+      end.to raise_error(Processable::StepNotFoundError)
     end
   end
 
