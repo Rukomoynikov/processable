@@ -18,8 +18,12 @@ RSpec.describe Processable do
       expect(class_1.new.process(run_until: :step1)).to eq(1)
     end
 
-    it "calls only until second step" do
+    it "executes a specific step with provided option" do
       expect(class_1.new.exec_step(step_name: :step2, options: 3)).to eq(5)
+    end
+
+    it "raises an error when an invalid step name is provided" do
+      expect { class_1.new.exec_step(step_name: :invalid_step, options: 3) }.to raise_error(Processable::StepNotFoundError)
     end
   end
 

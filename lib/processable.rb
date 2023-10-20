@@ -19,7 +19,7 @@ class Processable
   #  Collections of steps like
   # @type [String]
   @@registered_steps = []
-  class Error < StandardError; end
+  class StepNotFoundError < StandardError; end
 
   class << self
     # Adding new step to the process
@@ -34,6 +34,8 @@ class Processable
   def process(run_until: nil)
     steps_to_run = if run_until
                      run_until_index = @@registered_steps.find_index { |step_hash| step_hash[:name] == run_until }
+                     raise StepNotFoundError, "Step '#{run_until}' not found" unless run_until_index
+
                      @@registered_steps[0..run_until_index]
                    else
                      @@registered_steps
@@ -56,7 +58,7 @@ class Processable
   def exec_step(step_name:, options:)
     step = @@registered_steps.find { |step| step[:name] == step_name }
 
-    raise Error, "Step '#{step_name}' not found" unless step
+    raise StepNotFoundError, "Step '#{step_name}' not found" unless step
 
     instance_exec(options, step, @@registered_steps, &step[:block])
   end
