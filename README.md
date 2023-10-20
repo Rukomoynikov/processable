@@ -13,8 +13,8 @@ class PrintGithubRepos < Processable
     repos_json.except(:title, :description)
   end
   
-  step :print_to_console do |repos_json|
-    print repos_json
+  step :print_to_console do |result_from_prev_step, current_step, list_of_steps|
+    print result_from_prev_step
   end
 end
 
@@ -30,13 +30,14 @@ gem 'processable'
 ```
 
 And then execute:
-
-    $ bundle install
+```shell
+bundle install
+```
 
 Or install it yourself as:
-
-    $ gem install processable
-
+```shell
+gem install processable
+```
 ## Usage
 
 **Define new class with required behavior**
@@ -71,6 +72,19 @@ To start the process simply call...
 ```ruby
 SiteScrapper.new.process
 ```
+
+To run the process until some certain step you can pass the name of the step as an argument. Also keep in mind the step defined in run_until will not be executed as well.
+
+```ruby
+SiteScrapper.new.process(run_until: :save_to_database)
+```
+
+To exec only one particular step you can pass the name of the step as an argument. 
+
+```ruby
+SiteScrapper.new.process(exec_step: :save_to_database)
+```
+
 
 ## Development
 
